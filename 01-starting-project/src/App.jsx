@@ -1,19 +1,47 @@
+import { useState } from "react";
+import CoreConcept from "./components/CoreConcept/CoreConcept";
+import Header from "./components/Header/Header";
+import TabButton from "./components/TabButton/TabButton";
+import { coreConceptsData } from "./data/data";
+
 function App() {
-  return (
-    <div>
-      <header>
-        <img src="src/assets/react-core-concepts.png" alt="Stylized atom" />
-        <h1>React Essentials</h1>
-        <p>
-          Fundamental React concepts you will need for almost any app you are
-          going to build!
-        </p>
-      </header>
-      <main>
-        <h2>Time to get started!</h2>
-      </main>
-    </div>
-  );
+	const [currentTab, setCurrentTab] = useState("");
+
+	function handleClick(event) {
+		setCurrentTab(event);
+	}
+	return (
+		<div>
+			<Header />
+			<main>
+				<section id="core-concepts">
+					<h2>Core Concepts</h2>
+					<ul>
+						{coreConceptsData.map((concept, index) => (
+							<CoreConcept
+								keyIndex={index}
+								image={concept.imageSrc}
+								title={concept.title}
+								description={concept.description}
+							/>
+						))}
+					</ul>
+				</section>
+				<section id="examples">
+					<h2>Examples</h2>
+					<menu>
+						<TabButton onClick={() => handleClick("components")}>
+							Components
+						</TabButton>
+						<TabButton onClick={() => handleClick("jsx")}>JSX</TabButton>
+						<TabButton onClick={() => handleClick("props")}>Props</TabButton>
+						<TabButton onClick={() => handleClick("state")}>State</TabButton>
+					</menu>
+					{currentTab}
+				</section>
+			</main>
+		</div>
+	);
 }
 
 export default App;
