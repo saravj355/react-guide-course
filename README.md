@@ -4,4 +4,4 @@
 
 ### 01-starting-project
 
-![](screenshots/01-starting-project/screen-capture.webm)
+![](screenshots/01-starting-project/screen-capture.gif)
