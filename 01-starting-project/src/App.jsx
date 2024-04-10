@@ -2,14 +2,15 @@ import { useState } from "react";
 import CoreConcept from "./components/CoreConcept/CoreConcept";
 import Header from "./components/Header/Header";
 import TabButton from "./components/TabButton/TabButton";
-import { coreConceptsData } from "./data/data";
+import { coreConceptsData, tabsData } from "./data/data";
 
 function App() {
-	const [currentTab, setCurrentTab] = useState("");
+	const [currentTab, setCurrentTab] = useState(-1);
 
-	function handleClick(event) {
-		setCurrentTab(event);
+	function handleClick(buttonIndex) {
+		setCurrentTab(buttonIndex);
 	}
+
 	return (
 		<div>
 			<Header />
@@ -19,7 +20,7 @@ function App() {
 					<ul>
 						{coreConceptsData.map((concept, index) => (
 							<CoreConcept
-								keyIndex={index}
+								key={index}
 								image={concept.imageSrc}
 								title={concept.title}
 								description={concept.description}
@@ -30,14 +31,29 @@ function App() {
 				<section id="examples">
 					<h2>Examples</h2>
 					<menu>
-						<TabButton onClick={() => handleClick("components")}>
-							Components
-						</TabButton>
-						<TabButton onClick={() => handleClick("jsx")}>JSX</TabButton>
-						<TabButton onClick={() => handleClick("props")}>Props</TabButton>
-						<TabButton onClick={() => handleClick("state")}>State</TabButton>
+						{tabsData.map((tab, index) => (
+							<TabButton
+								key={index}
+								isActive={index === currentTab}
+								onClick={() => handleClick(index)}
+							>
+								{tab.title}
+							</TabButton>
+						))}
 					</menu>
-					{currentTab}
+					<div id="tab-content">
+						{currentTab !== -1 ? (
+							<>
+								<h3>{tabsData[currentTab].title}</h3>
+								<p>{tabsData[currentTab].description}</p>
+								<pre>
+									<code>{tabsData[currentTab].code}</code>
+								</pre>
+							</>
+						) : (
+							<p>Please select a topic</p>
+						)}
+					</div>
 				</section>
 			</main>
 		</div>
