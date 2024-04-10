@@ -1,7 +1,4 @@
-import React from "react";
-import "./CoreConcept.css";
-
-function CoreConcept(props) {
+function Concept(props) {
 	const { image, title, description } = props;
 
 	return (
@@ -13,4 +10,4 @@ function CoreConcept(props) {
 	);
 }
 
-export default CoreConcept;
+export default Concept;
