@@ -13,7 +13,7 @@ export default [
 			semi: "error",
 			"prefer-const": "error",
 			"react/self-closing-comp": "error",
-			"react/prop-types": "error",
+			"react/prop-types": "off",
 			"react/react-in-jsx-scope": "off",
 			"react/jsx-pascal-case": "error",
 		},
